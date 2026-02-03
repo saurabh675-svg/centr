@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WealthSpark</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">WealthSpark • A playful wealth planner</p>
+          <h1>Make bold money moves, one tiny habit at a time.</h1>
+          <p class="subhead">
+            WealthSpark is a cozy, gamified plan builder that turns “get rich” into
+            trackable habits, momentum streaks, and quick wins.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" id="start-plan">Start my plan</button>
+            <button class="ghost" id="surprise-me">Surprise me</button>
+          </div>
+          <div class="trust-row">
+            <span>🔒 No crypto promises</span>
+            <span>⚡ 10-minute daily actions</span>
+            <span>🎯 Goal-based tracking</span>
+          </div>
+        </div>
+        <section class="card preview" aria-live="polite">
+          <h2>Your wealth recipe</h2>
+          <div class="preview-stat">
+            <p class="label">Goal</p>
+            <p id="goal-output" class="value">$250k emergency fund</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Timeline</p>
+            <p id="timeline-output" class="value">36 months</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Daily habit</p>
+            <p id="habit-output" class="value">Automate $18/day</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Momentum</p>
+            <p id="momentum-output" class="value">Day 4 streak</p>
+          </div>
+          <div class="meter">
+            <span>Momentum</span>
+            <div class="bar">
+              <div class="fill" id="momentum-bar"></div>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <section class="grid">
+        <article class="card">
+          <h3>Pick a real goal</h3>
+          <p>
+            Dream targets become real when you attach a number and a date. Start with
+            an emergency fund, a down payment, or a “walk-away” runway.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Choose one micro-move</h3>
+          <p>
+            WealthSpark nudges you to pick one daily action: automate savings,
+            negotiate a bill, or earn from a side skill.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Celebrate momentum</h3>
+          <p>
+            Momentum beats motivation. Your streak grows with every habit check-in,
+            and the plan adapts when life gets busy.
+          </p>
+        </article>
+      </section>
+
+      <section class="card builder">
+        <h2>Build your get-rich-without-hype plan</h2>
+        <form id="plan-form">
+          <label>
+            Wealth goal
+            <input type="text" name="goal" placeholder="$250k emergency fund" required />
+          </label>
+          <label>
+            Timeline (months)
+            <input type="number" name="timeline" min="3" max="120" value="36" required />
+          </label>
+          <label>
+            Daily habit
+            <input type="text" name="habit" placeholder="Automate $18/day" required />
+          </label>
+          <label>
+            Momentum streak (days)
+            <input type="number" name="momentum" min="1" max="365" value="4" required />
+          </label>
+          <button class="primary" type="submit">Update my plan</button>
+        </form>
+        <p class="disclaimer">
+          WealthSpark is for motivation and planning only. It does not provide
+          financial advice, investment guarantees, or income promises.
+        </p>
+      </section>
+    </main>
+    <footer class="footer">
+      Built with optimism, spreadsheets, and a pinch of reality.
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

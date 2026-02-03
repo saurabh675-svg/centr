@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ProsperPath</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">ProsperPath • Practical wealth planning</p>
+          <h1>Build wealth with clear goals, steady habits, and honest math.</h1>
+          <p class="subhead">
+            ProsperPath helps you turn a “get rich” wish into a realistic, trackable
+            plan. Set a target, add your monthly moves, and see what progress can look like.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" id="focus-form">Build my plan</button>
+            <button class="ghost" id="load-template">Load a sample plan</button>
+          </div>
+          <div class="trust-row">
+            <span>📈 Goal-based projections</span>
+            <span>🧾 Cash-flow clarity</span>
+            <span>🧠 No hype promises</span>
+          </div>
+        </div>
+        <section class="card preview" aria-live="polite">
+          <h2>Your plan snapshot</h2>
+          <div class="preview-stat">
+            <p class="label">Target</p>
+            <p id="goal-output" class="value">$50,000 opportunity fund</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Monthly contribution</p>
+            <p id="contribution-output" class="value">$1,200/month</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Runway</p>
+            <p id="timeline-output" class="value">29 months to target</p>
+          </div>
+          <div class="preview-stat">
+            <p class="label">Next best move</p>
+            <p id="habit-output" class="value">Increase transfer by $50</p>
+          </div>
+          <div class="meter">
+            <span>Progress potential</span>
+            <div class="bar">
+              <div class="fill" id="momentum-bar"></div>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <section class="grid">
+        <article class="card">
+          <h3>Make the target specific</h3>
+          <p>
+            Wealth grows faster when the finish line is clear. Pick a number, define
+            a timeline, and name what the money unlocks for you.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Stack reliable inputs</h3>
+          <p>
+            Combine steady savings, income upgrades, and smart expense trims to build
+            a repeatable monthly surplus.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Track the boring wins</h3>
+          <p>
+            Small gains beat big promises. Monitor your savings rate and adjust
+            when life shifts to keep the plan durable.
+          </p>
+        </article>
+      </section>
+
+      <section class="card builder">
+        <h2>Build a real-world wealth plan</h2>
+        <form id="plan-form">
+          <label>
+            Wealth goal
+            <input type="text" name="goal" placeholder="$50,000 opportunity fund" required />
+          </label>
+          <div class="two-col">
+            <label>
+              Current savings
+              <input type="number" name="current" min="0" value="15000" required />
+            </label>
+            <label>
+              Goal amount
+              <input type="number" name="target" min="1000" value="50000" required />
+            </label>
+          </div>
+          <div class="two-col">
+            <label>
+              Monthly savings
+              <input type="number" name="monthly" min="0" value="900" required />
+            </label>
+            <label>
+              Extra income
+              <input type="number" name="extra" min="0" value="300" required />
+            </label>
+          </div>
+          <label>
+            Next best move
+            <input type="text" name="habit" placeholder="Increase transfer by $50" required />
+          </label>
+          <button class="primary" type="submit">Update snapshot</button>
+        </form>
+        <p class="disclaimer">
+          ProsperPath is for motivation and planning only. It does not provide
+          financial advice, investment guarantees, or income promises.
+        </p>
+      </section>
+    </main>
+    <footer class="footer">
+      Built for disciplined progress, not quick fixes.
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

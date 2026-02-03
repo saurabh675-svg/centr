@@ -1,67 +1,98 @@
 const goalOutput = document.getElementById("goal-output");
+const contributionOutput = document.getElementById("contribution-output");
 const timelineOutput = document.getElementById("timeline-output");
 const habitOutput = document.getElementById("habit-output");
-const momentumOutput = document.getElementById("momentum-output");
 const momentumBar = document.getElementById("momentum-bar");
 const planForm = document.getElementById("plan-form");
-const startPlanButton = document.getElementById("start-plan");
-const surpriseButton = document.getElementById("surprise-me");
+const focusFormButton = document.getElementById("focus-form");
+const loadTemplateButton = document.getElementById("load-template");
 
-const surprisePlans = [
+const templates = [
   {
-    goal: "$100k career runway",
-    timeline: 24,
-    habit: "Invoice one client follow-up",
-    momentum: 6,
+    goal: "$80,000 career runway",
+    current: 20000,
+    target: 80000,
+    monthly: 1400,
+    extra: 300,
+    habit: "Schedule a monthly side-income review",
   },
   {
-    goal: "$75k home down payment",
-    timeline: 30,
-    habit: "Sell one unused item",
-    momentum: 12,
+    goal: "$35,000 emergency fund",
+    current: 7000,
+    target: 35000,
+    monthly: 700,
+    extra: 200,
+    habit: "Negotiate one bill this week",
   },
   {
-    goal: "Debt-free in 18 months",
-    timeline: 18,
-    habit: "Call one bill to negotiate",
-    momentum: 8,
+    goal: "$120,000 down payment",
+    current: 45000,
+    target: 120000,
+    monthly: 1800,
+    extra: 600,
+    habit: "Automate a 1% savings raise",
   },
 ];
 
-const updatePreview = ({ goal, timeline, habit, momentum }) => {
-  goalOutput.textContent = goal;
-  timelineOutput.textContent = `${timeline} months`;
-  habitOutput.textContent = habit;
-  momentumOutput.textContent = `Day ${momentum} streak`;
+const formatCurrency = (value) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
 
-  const percent = Math.min(100, Math.max(10, Math.round((momentum / 30) * 100)));
-  momentumBar.style.width = `${percent}%`;
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const calculateTimeline = ({ current, target, monthly, extra }) => {
+  const monthlyTotal = monthly + extra;
+  if (monthlyTotal <= 0) {
+    return Infinity;
+  }
+  const remaining = Math.max(0, target - current);
+  return Math.ceil(remaining / monthlyTotal);
 };
+
+const updatePreview = ({ goal, current, target, monthly, extra, habit }) => {
+  const monthlyTotal = monthly + extra;
+  const months = calculateTimeline({ current, target, monthly, extra });
+  const progress = target > 0 ? (current / target) * 100 : 0;
+
+  goalOutput.textContent = goal;
+  contributionOutput.textContent = `${formatCurrency(monthlyTotal)}/month`;
+  timelineOutput.textContent =
+    months === Infinity ? "Add a monthly contribution" : `${months} months to target`;
+  habitOutput.textContent = habit;
+  momentumBar.style.width = `${clamp(Math.round(progress), 8, 100)}%`;
+};
+
+const getFormValues = () => ({
+  goal: planForm.goal.value,
+  current: Number(planForm.current.value),
+  target: Number(planForm.target.value),
+  monthly: Number(planForm.monthly.value),
+  extra: Number(planForm.extra.value),
+  habit: planForm.habit.value,
+});
 
 planForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const formData = new FormData(planForm);
-  updatePreview({
-    goal: formData.get("goal"),
-    timeline: formData.get("timeline"),
-    habit: formData.get("habit"),
-    momentum: formData.get("momentum"),
-  });
+  updatePreview(getFormValues());
 });
 
-startPlanButton.addEventListener("click", () => {
-  const goal = prompt("What's your wealth goal?", "Build a $20k safety net");
-  if (goal) {
-    planForm.goal.value = goal;
-  }
+focusFormButton.addEventListener("click", () => {
   planForm.scrollIntoView({ behavior: "smooth" });
+  planForm.goal.focus();
 });
 
-surpriseButton.addEventListener("click", () => {
-  const pick = surprisePlans[Math.floor(Math.random() * surprisePlans.length)];
+loadTemplateButton.addEventListener("click", () => {
+  const pick = templates[Math.floor(Math.random() * templates.length)];
   planForm.goal.value = pick.goal;
-  planForm.timeline.value = pick.timeline;
+  planForm.current.value = pick.current;
+  planForm.target.value = pick.target;
+  planForm.monthly.value = pick.monthly;
+  planForm.extra.value = pick.extra;
   planForm.habit.value = pick.habit;
-  planForm.momentum.value = pick.momentum;
   updatePreview(pick);
 });
+
+updatePreview(getFormValues());

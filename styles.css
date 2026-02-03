@@ -149,7 +149,7 @@ button:hover {
 
 .fill {
   height: 100%;
-  width: 40%;
+  width: 45%;
   background: linear-gradient(90deg, #6b5edb, #9a8cff);
   transition: width 0.3s ease;
 }
@@ -168,6 +168,12 @@ button:hover {
 form {
   display: grid;
   gap: 16px;
+}
+
+.two-col {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 label {
